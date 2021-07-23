@@ -62,15 +62,7 @@ def peminjamangetbyid(request,pk):
 			serializer = PinjamanNestedSerializer(data_pinjamans, many=True)
 			cache.set(pk,data_pinjamans)
 			print('data from db')
-			return Response(serializer.data, status=status.HTTP_200_OK)
-	elif request.method == 'PUT':
-		serializer = PinjamanNestedSerializer(data_pinjamans,data=request.data)				
-		if serializer.is_valid():			
-			serializer.save()
-			cache.clear()
-			print('delete from cache')
-			return Response(serializer.data, status=status.HTTP_201_CREATED)
-		return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+			return Response(serializer.data, status=status.HTTP_200_OK)	
 	elif request.method == 'DELETE':
 		data_pinjamans.delete()
 		return Response(status=status.HTTP_204_NO_CONTENT)
